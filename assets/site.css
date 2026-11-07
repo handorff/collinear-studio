@@ -1,0 +1,180 @@
+:root {
+  color-scheme: light dark;
+  --panel: #f9fbff;
+  --ink: #111e3e;
+  --muted: #4b5c7d;
+  --accent: #214bc6;
+  --on-accent: #fff;
+  --rule: #c8d4eb;
+  --plot: #eef3ff;
+  --plot-dot: #244bba;
+  --shadow: #102a6524;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --panel: #141e33;
+    --ink: #e8efff;
+    --muted: #a5b5d7;
+    --accent: #9bb7ff;
+    --on-accent: #101b37;
+    --rule: #344565;
+    --plot: #111c31;
+    --plot-dot: #86a7ff;
+    --shadow: #03060f75;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--plot);
+  color: var(--ink);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.plot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.plot:not(.is-drawn) {
+  background: radial-gradient(circle, var(--rule) 1px, transparent 1.5px) center / 22px 22px;
+}
+
+.plot canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.studio-title {
+  position: absolute;
+  inset-block-start: clamp(20px, 4vw, 48px);
+  inset-inline-start: clamp(20px, 4vw, 48px);
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+}
+
+.project-point {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: var(--accent);
+}
+
+.plot.is-drawn .project-point {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.project-point::before,
+.project-point::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(var(--relay-scale, 1));
+}
+
+.project-point::before {
+  inset: 10px;
+  border: 1px solid currentColor;
+  background: var(--plot);
+  box-shadow: 0 0 0 4px var(--plot);
+}
+
+.project-point::after {
+  inset: 18px;
+  background: currentColor;
+}
+
+.project-point:hover,
+.project-point:focus-visible { z-index: 1; }
+
+.project-point:hover::before,
+.project-point:focus-visible::before,
+.project-point[aria-expanded="true"]::before { background: var(--accent); }
+
+.project-point:hover::after,
+.project-point:focus-visible::after,
+.project-point[aria-expanded="true"]::after { background: var(--on-accent); }
+
+.project-tooltip {
+  position: absolute;
+  z-index: 2;
+  width: min(19rem, 100% - 24px);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+.project-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--tooltip-pointer);
+  width: 10px;
+  height: 10px;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  background: var(--panel);
+  transform: translate(-50%, -50%) rotate(45deg);
+  pointer-events: none;
+}
+
+.project-tooltip.is-above::after {
+  top: 100%;
+  transform: translate(-50%, -50%) rotate(225deg);
+}
+
+.tooltip-content {
+  max-height: var(--tooltip-max-height);
+  overflow: auto;
+  padding: 14px 16px 10px;
+  border: 1px solid var(--rule);
+  border-radius: inherit;
+  background: var(--panel);
+}
+
+.project-tooltip h2 {
+  margin: 0 0 6px;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+#project-summary {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.project-link {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-size: 0.875rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.project-link:hover { text-decoration: underline; }
