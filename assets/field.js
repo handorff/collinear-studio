@@ -21,7 +21,8 @@ const lineDirections = [
 
 const detailsTitle = details.querySelector("#project-title");
 const detailsSummary = details.querySelector("#project-summary");
-const detailsLink = details.querySelector(".project-link");
+const detailsLinks = details.querySelector(".project-links");
+const linkTemplate = document.querySelector("#project-link-template");
 const travelTime = 3.6;
 const rippleDuration = 2.6;
 const cycleTime = travelTime + rippleDuration + 0.35;
@@ -65,6 +66,13 @@ function closeProject(restoreFocus = false) {
   activePoint = undefined;
 }
 
+function projectLink(href, label) {
+  const link = linkTemplate.content.firstElementChild.cloneNode(true);
+  link.href = href;
+  link.firstElementChild.textContent = label;
+  return link;
+}
+
 function toggleProject(event) {
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
     return;
@@ -82,8 +90,12 @@ function toggleProject(event) {
   point.setAttribute("aria-expanded", "true");
   detailsTitle.textContent = point.getAttribute("aria-label");
   detailsSummary.textContent = point.dataset.summary;
-  detailsLink.href = point.href;
-  detailsLink.firstElementChild.textContent = point.dataset.linkLabel;
+  const links = [];
+  if (point.dataset.extraLink) {
+    links.push(projectLink(point.dataset.extraLink, point.dataset.extraLinkLabel));
+  }
+  links.push(projectLink(point.href, point.dataset.linkLabel));
+  detailsLinks.replaceChildren(...links);
   details.hidden = false;
   positionDetails();
   details.focus({ preventScroll: true });

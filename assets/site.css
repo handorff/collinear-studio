@@ -147,11 +147,12 @@ body {
 .tooltip-content {
   max-height: var(--tooltip-max-height);
   overflow: auto;
-  padding: 14px 16px 10px;
   border: 1px solid var(--rule);
   border-radius: inherit;
   background: var(--panel);
 }
+
+.project-copy { padding: 14px 16px 12px; }
 
 .project-tooltip h2 {
   margin: 0 0 6px;
@@ -167,14 +168,17 @@ body {
 }
 
 .project-link {
-  display: inline-flex;
-  min-height: 36px;
+  display: flex;
+  min-height: 40px;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
+  padding: 8px 16px;
+  border-top: 1px solid var(--rule);
   color: var(--accent);
   font-size: 0.875rem;
-  font-weight: 650;
   text-decoration: none;
 }
 
 .project-link:hover { text-decoration: underline; }
+.project-link:focus-visible { outline-offset: -4px; }

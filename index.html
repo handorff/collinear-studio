@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Collinear Studio is an independent studio for prints, tools, and experiments. Explore Now Arriving, Pasta Standards Manual, and Paul Handorff’s personal site.">
+  <meta name="description" content="Collinear Studio is an independent studio for prints, tools, and experiments. Explore Now Arriving, Paul Handorff’s personal site, and Pasta Standards Manual.">
   <title>Collinear Studio</title>
   <link rel="icon" href="./assets/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./assets/site.css">
@@ -14,27 +14,34 @@
   <main class="plot" aria-label="Collinear Studio projects">
     <canvas aria-hidden="true"></canvas>
     <h1 class="studio-title">Collinear Studio</h1>
-    <a class="project-point" href="https://nowarriving.store"
+    <a class="project-point" href="https://nowarriving.store/"
       aria-label="Now Arriving"
-      data-summary="Transit maps and route diagrams drawn with a pen plotter. The linework traces the routes that connect the places we pass through every day."
-      data-link-label="Visit Now Arriving"></a>
-    <a class="project-point" href="https://github.com/handorff/pasta-engineers"
-      aria-label="Pasta Standards Manual"
-      data-summary="An illustrated reference to pasta shapes, drawn with a pen plotter. Each technical plate treats a familiar shape as an engineering drawing, complete with dimensions and cross-sections."
-      data-link-label="View the project on GitHub"></a>
+      data-summary="Boston transit routes and stations drawn with a pen plotter."
+      data-extra-link="https://paulhandorff.com/transit-plots/"
+      data-extra-link-label="View the SVG generator"
+      data-link-label="Purchase prints and notebooks"></a>
     <a class="project-point" href="https://paulhandorff.com/"
       aria-label="Paul Handorff"
-      data-summary="Paul Handorff’s personal site, with a brief bio and a collection of projects including transit maps, a word game, and a tiling tool."
+      data-summary="Personal website."
       data-link-label="Visit paulhandorff.com"></a>
+    <a class="project-point" href="https://github.com/handorff/pasta-engineers"
+      aria-label="Pasta Standards Manual"
+      data-summary="A shared reference for excellence in pasta design and production."
+      data-link-label="View the project on GitHub"></a>
 
     <section id="project-details" class="project-tooltip" aria-labelledby="project-title"
       aria-describedby="project-summary" tabindex="-1" hidden>
       <div class="tooltip-content">
-        <h2 id="project-title"></h2>
-        <p id="project-summary"></p>
-        <a class="project-link" href="./"><span></span><span aria-hidden="true">↗</span></a>
+        <div class="project-copy">
+          <h2 id="project-title"></h2>
+          <p id="project-summary"></p>
+        </div>
+        <div class="project-links"></div>
       </div>
     </section>
+    <template id="project-link-template">
+      <a class="project-link"><span></span><span aria-hidden="true">→</span></a>
+    </template>
   </main>
 </body>
 </html>
